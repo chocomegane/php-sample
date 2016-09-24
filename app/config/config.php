@@ -6,16 +6,16 @@
 defined('BASE_PATH') || define('BASE_PATH', getenv('BASE_PATH') ?: realpath(dirname(__FILE__) . '/../..'));
 defined('APP_PATH') || define('APP_PATH', BASE_PATH . '/app');
 
-return new \Phalcon\Config([
-    'database' => [
+return new \Phalcon\Config(array(
+    'database' => array(
         'adapter'     => 'Mysql',
         'host'        => 'localhost',
         'username'    => 'root',
         'password'    => '',
         'dbname'      => 'test',
         'charset'     => 'utf8',
-    ],
-    'application' => [
+    ),
+    'application' => array(
         'appDir'         => APP_PATH . '/',
         'controllersDir' => APP_PATH . '/controllers/',
         'modelsDir'      => APP_PATH . '/models/',
@@ -25,5 +25,5 @@ return new \Phalcon\Config([
         'libraryDir'     => APP_PATH . '/library/',
         'cacheDir'       => BASE_PATH . '/cache/',
         'baseUri'        => '/phalcon-sample/',
-    ]
-]);
+    )
+));

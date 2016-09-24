@@ -1,5 +1,7 @@
 <?php
 
+
+
 class IndexController extends ControllerBase
 {
 
@@ -15,7 +17,7 @@ class IndexController extends ControllerBase
     //     array_push($friend, $person);
     //     $person = array(
     //     				'name' => 'huzimoto',
-    //     				'age'  => 21 
+    //     				'age'  => 21
     //       				);
 
     //     array_push($friend, $person);
@@ -30,7 +32,7 @@ class IndexController extends ControllerBase
 
     public function indexAction()
     {
-    	require_onece 
+    	// require_onece 'queue.class.php';
     }
 
 

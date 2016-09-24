@@ -37,22 +37,22 @@ $di->setShared('view', function () {
     $view->setDI($this);
     $view->setViewsDir($config->application->viewsDir);
 
-    $view->registerEngines([
+    $view->registerEngines(array(
         '.volt' => function ($view) {
             $config = $this->getConfig();
 
             $volt = new VoltEngine($view, $this);
 
-            $volt->setOptions([
+            $volt->setOptions(array(
                 'compiledPath' => $config->application->cacheDir,
                 'compiledSeparator' => '_'
-            ]);
+            ));
 
             return $volt;
         },
         '.phtml' => PhpEngine::class
 
-    ]);
+    );
 
     return $view;
 });
@@ -64,13 +64,13 @@ $di->setShared('db', function () {
     $config = $this->getConfig();
 
     $class = 'Phalcon\Db\Adapter\Pdo\\' . $config->database->adapter;
-    $connection = new $class([
+    $connection = new $class(array(
         'host'     => $config->database->host,
         'username' => $config->database->username,
         'password' => $config->database->password,
         'dbname'   => $config->database->dbname,
         'charset'  => $config->database->charset
-    ]);
+    ));
 
     return $connection;
 });
@@ -87,12 +87,12 @@ $di->setShared('modelsMetadata', function () {
  * Register the session flash service with the Twitter Bootstrap classes
  */
 $di->set('flash', function () {
-    return new Flash([
+    return new Flash(array(
         'error'   => 'alert alert-danger',
         'success' => 'alert alert-success',
         'notice'  => 'alert alert-info',
         'warning' => 'alert alert-warning'
-    ]);
+    ));
 });
 
 /**
