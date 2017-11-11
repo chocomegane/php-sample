@@ -43,7 +43,6 @@ try {
  
     //loader読み込み
     require APP_PATH . 'app/config/loader.php';
- var_dump(APP_PATH);
     //service読み込み
     require APP_PATH . 'app/config/services.php';
 

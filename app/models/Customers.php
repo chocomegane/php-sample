@@ -1,4 +1,6 @@
 <?php
+
+
 class Customers extends \Phalcon\Mvc\Model
 {
     public $id;
@@ -86,6 +88,7 @@ class Customers extends \Phalcon\Mvc\Model
      * @param type $password　作成者のパスワード
      */
   public function regist($name,$mail_adress,$password){
+     
       
     $now_time =  date("Y-m-d H:i:s");
     $CustomerModel = new Customers;
