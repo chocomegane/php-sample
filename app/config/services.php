@@ -11,8 +11,10 @@ use Phalcon\Flash\Direct as Flash;
 /**
  * Shared configuration service
  */
+
+
 $di->setShared('config', function () {
-    return include APP_PATH . "/config/config.php";
+    return include APP_PATH . "app/config/config.php";
 });
 
 /**
@@ -30,32 +32,31 @@ $di->setShared('url', function () {
 /**
  * Setting up the view component
  */
-$di->setShared('view', function () {
-    $config = $this->getConfig();
-
-    $view = new View();
-    $view->setDI($this);
-    $view->setViewsDir($config->application->viewsDir);
-
-    $view->registerEngines(array(
-        '.volt' => function ($view) {
-            $config = $this->getConfig();
-
-            $volt = new VoltEngine($view, $this);
-
-            $volt->setOptions(array(
-                'compiledPath' => $config->application->cacheDir,
-                'compiledSeparator' => '_'
-            ));
-
-            return $volt;
-        },
-        '.phtml' => PhpEngine::class
-
-    );
-
-    return $view;
-});
+//$di->setShared('view', function () {
+//    $config = $this->getConfig();
+//
+//    $view = new View();
+//    $view->setDI($this);
+//    $view->setViewsDir($config->application->viewsDir);
+//
+//    $view->registerEngines(array(
+//        '.volt' => function ($view) {
+//            $config = $this->getConfig();
+//
+//            $volt = new VoltEngine($view, $this);
+//
+//            $volt->setOptions(array(
+//                'compiledPath' => $config->application->cacheDir,
+//                'compiledSeparator' => '_'
+//            ));
+//
+//            return $volt;
+//        },
+//        '.phtml' => PhpEngine::class
+//
+//    ));
+//    return $view;
+//});
 
 /**
  * Database connection is created based in the parameters defined in the configuration file

@@ -5,35 +5,49 @@ use Phalcon\Mvc\View;
 use Phalcon\Mvc\Application;
 use Phalcon\Di\FactoryDefault;
 use Phalcon\Mvc\Url as UrlProvider;
+use Phalcon\Config\Adapter\Ini as ConfigIni;
 use Phalcon\Db\Adapter\Pdo\Mysql as DbAdapter;
 
 try {
 
-    // ƒI[ƒgƒ[ƒ_‚ÉƒfƒBƒŒƒNƒgƒŠ‚ð“o˜^‚·‚é
+    // ï¿½Iï¿½[ï¿½gï¿½ï¿½ï¿½[ï¿½_ï¿½Éƒfï¿½Bï¿½ï¿½ï¿½Nï¿½gï¿½ï¿½ï¿½ï¿½oï¿½^ï¿½ï¿½ï¿½ï¿½
     $loader = new Loader();
     $loader->registerDirs(array(
         '../app/controllers/',
-        '../app/models/'
+        '../app/models/',
+        '../app/logic/'
     ))->register();
 
-    // DIƒRƒ“ƒeƒi‚ðì‚é
+    // DIï¿½Rï¿½ï¿½ï¿½eï¿½iï¿½ï¿½ï¿½ï¿½ï¿½
     $di = new FactoryDefault();
 
-    // ƒrƒ…[‚ÌƒRƒ“ƒ|[ƒlƒ“ƒg‚Ì‘g‚Ý—§‚Ä
+    // ï¿½rï¿½ï¿½ï¿½[ï¿½ÌƒRï¿½ï¿½ï¿½|ï¿½[ï¿½lï¿½ï¿½ï¿½gï¿½Ì‘gï¿½Ý—ï¿½ï¿½ï¿½
     $di->set('view', function () {
         $view = new View();
         $view->setViewsDir('../app/views/');
         return $view;
     });
 
-    // ƒx[ƒXURI‚ðÝ’è‚µ‚ÄA¶¬‚³‚ê‚é‘S‚Ä‚ÌURI‚ªuphalconv‚ðŠÜ‚Þ‚æ‚¤‚É‚·‚é
+    // ï¿½xï¿½[ï¿½XURIï¿½ï¿½Ý’è‚µï¿½ÄAï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Sï¿½Ä‚ï¿½URIï¿½ï¿½ï¿½uphalconï¿½vï¿½ï¿½ï¿½Ü‚Þ‚æ‚¤ï¿½É‚ï¿½ï¿½ï¿½
     $di->set('url', function () {
         $url = new UrlProvider();
         $url->setBaseUri('/phalcon-sample/');
         return $url;
     });
+    
+    define("APP_PATH", realpath('..').'/');
 
-    // ƒŠƒNƒGƒXƒg‚ðˆ—‚·‚é
+    //è¨­å®šèª­ã¿è¾¼ã¿
+    $config = new ConfigIni(APP_PATH . 'app/config/config.ini');
+    
+ 
+    //loaderèª­ã¿è¾¼ã¿
+    require APP_PATH . 'app/config/loader.php';
+ var_dump(APP_PATH);
+    //serviceèª­ã¿è¾¼ã¿
+    require APP_PATH . 'app/config/services.php';
+
+    // ï¿½ï¿½ï¿½Nï¿½Gï¿½Xï¿½gï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     $application = new Application($di);
 
     echo $application->handle()->getContent();
