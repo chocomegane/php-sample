@@ -1,6 +1,6 @@
 <?php
 
-
+use Phalcon\DI\FactoryDefault;
 class Customers extends \Phalcon\Mvc\Model
 {
     public $id;
@@ -97,8 +97,33 @@ class Customers extends \Phalcon\Mvc\Model
     $CustomerModel->setPassword($password);  
     $CustomerModel->setCreate_at($now_time);
     $CustomerModel->setUpdate_at($now_time);
-    
+    $CustomerModel->setDelete_flg(0);
     return $CustomerModel -> save() ;
     
   }
+    /**
+     * 
+     * メールアドレスを元にアカウントを取得する
+     * 
+     * @param type $name　作成するアカウント名
+     * @param type $mail_adress　作成者のメールアドレス
+     * @param type $password　作成者のパスワード
+     */
+  public function getByMailaddres($mail_adress){
+
+     
+       $phql  = "SELECT id FROM customers WHERE mail_adress = '$mail_adress' AND delete_flg = 0" ;
+       $db = self::getConnection();
+       return $db->query($phql);
+    }  
+    
+    
+    
+    
+    public static function getConnection()
+    {
+        $di = FactoryDefault::getDefault();
+
+        return $di->get('db');
+    }
 }
