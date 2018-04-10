@@ -34,7 +34,8 @@ class CustomerLogic
         $result = $customer_id->fetchAll();
 
         if(count($result) != 0){
-        return false;
+            return false;
+            
         }
         return true;
      }
